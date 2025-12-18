@@ -25,7 +25,7 @@ export default function Hero() {
           >
             <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-emerald-500 shadow-2xl shadow-emerald-500/50">
               <img
-                src="/src/assets/image.jpg"
+                src="https://cdn.discordapp.com/attachments/810581004162957332/1451089273863278642/IMG_20251009_212133.jpg?ex=6944e7b2&is=69439632&hm=f2385be7822e1af69845d00152ba7fffca3a4c5b3148ebeb3e6723b90e3c14a6&"
                 alt="Osman de León"
                 className="w-full h-full object-cover"
               />
