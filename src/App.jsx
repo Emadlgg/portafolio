@@ -1,4 +1,5 @@
-import { useState } from 'react'
+// src/App.jsx
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -9,21 +10,41 @@ import Footer from './components/Footer'
 import './App.css'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true)
+  const [activeSection, setActiveSection] = useState('home')
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+      
+      const sections = ['home', 'about', 'skills', 'projects', 'contact']
+      const current = sections.find(section => {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          return rect.top <= 100 && rect.bottom >= 100
+        }
+        return false
+      })
+      
+      if (current) setActiveSection(current)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
-        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white">
+      <Header activeSection={activeSection} isScrolled={isScrolled} />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   )
 }

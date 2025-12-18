@@ -1,105 +1,132 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+// src/components/Contact.jsx
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa'
 
 export default function Contact() {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  })
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Formulario enviado:', formData)
     alert('Mensaje enviado con éxito!')
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    })
+    setFormData({ name: '', email: '', message: '' })
   }
 
   return (
-    <section id="contact" className="py-20" ref={ref}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-32 bg-gray-900/50">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-bold text-center mb-12">
-            <span className="border-b-4 border-indigo-600 dark:border-indigo-400 pb-2">Contacto</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+              Contacto
+            </span>
           </h2>
 
-          <div className="flex flex-col md:flex-row gap-12">
-            <div className="md:w-1/2">
-              <h3 className="text-xl font-semibold mb-6">Información de contacto</h3>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-full">
-                    <FiMail className="text-indigo-600 dark:text-indigo-300" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Email</h4>
-                    <a
-                      href="mailto:osmanemanuel2004@gmail.com"
-                      className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
-                    >
-                      osmanemanuel2004@gmail.com
-                    </a>
-                  </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <h3 className="text-2xl font-semibold mb-6">Hablemos</h3>
+              
+              <div className="flex items-start gap-4 group">
+                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
+                  <FiMail className="text-xl" />
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-full">
-                    <FiMapPin className="text-indigo-600 dark:text-indigo-300" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Ubicación</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Guatemala, Guatemala</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-full">
-                    <FiPhone className="text-indigo-600 dark:text-indigo-300" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Teléfono</h4>
-                    <a
-                      href="https://wa.me/50241972946"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      
-                      className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
-                    >
-                      +502 41972946
-                    </a>
-                  </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Email</h4>
+                  <a href="mailto:osmanemanuel2004@gmail.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                    osmanemanuel2004@gmail.com
+                  </a>
                 </div>
               </div>
-            </div>
 
-            <div className="md:w-1/2">
+              <div className="flex items-start gap-4 group">
+                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
+                  <FiMapPin className="text-xl" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Ubicación</h4>
+                  <p className="text-gray-400">Guatemala, Guatemala</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
+                  <FiPhone className="text-xl" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Teléfono</h4>
+                  <a href="https://wa.me/50241972946" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                    +502 41972946
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-4 pt-6">
+                <motion.a
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  href="https://github.com/Emadlgg/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
+                >
+                  <FaGithub size={24} />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  href="https://www.linkedin.com/in/osman-edlg/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
+                >
+                  <FaLinkedin size={24} />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  href="https://x.com/Osman_E61"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
+                >
+                  <FaTwitter size={24} />
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  href="https://www.instagram.com/emadlg_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
+                >
+                  <FaInstagram size={24} />
+                </motion.a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-2xl shadow-2xl"
+            >
               <h3 className="text-xl font-semibold mb-6">Envíame un mensaje</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block mb-2">
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium">
                     Nombre
                   </label>
                   <input
@@ -109,12 +136,12 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800"
+                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block mb-2">
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium">
                     Email
                   </label>
                   <input
@@ -124,12 +151,12 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800"
+                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block mb-2">
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium">
                     Mensaje
                   </label>
                   <textarea
@@ -139,18 +166,18 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800"
-                  ></textarea>
+                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none resize-none"
+                  />
                 </div>
 
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition w-full"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-500 hover:to-teal-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/50 transform hover:scale-105"
                 >
                   Enviar Mensaje
                 </button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
